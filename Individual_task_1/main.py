@@ -1,56 +1,34 @@
-# Функция поиска кратчайшего
-# путь между двумя узлами графа
-def BFS_SP(graph, start, goal):
-    explored = []
-
-    # Очередь на обход
-    # график в БФС
-    queue = [[start]]
-
-    # Если нужный узел
-    # достиг
-    if start == goal:
-        print("Same Node")
-        return
-
-    # Цикл для обхода графа
-    # с помощью очереди
-    while queue:
-        path = queue.pop(0)
-        node = path[-1]
-
-        # Условие проверки
-        # текущий узел не посещается
-        if node not in explored:
-            neighbours = graph[node]
-
-            # Цикл для перебора
-            # соседи узла
-            for neighbour in neighbours:
-                new_path = list(path)
-                new_path.append(neighbour)
-                queue.append(new_path)
-
-                # Условие проверки
-                # соседний узел является целью
-                if neighbour == goal:
-                    print("Кратчайший путь из " + start + " в " + goal + " = ", *new_path)
-                    return
-            explored.append(node)
-
-    # Условие, когда узлы
-    # не подключены
-    print("Извините, но соединительного пути не существует :(")
-    return
+class Node:
+    def __init__(self, key):
+        self.data = key
+        self.left = None
+        self.right = None
 
 
-if __name__ == "__main__":
-    # График с использованием словарей
-    graph = {'A': ['B', 'E', 'C'],
-             'B': ['A', 'D', 'E'],
-             'C': ['A', 'F', 'G'],
-             'D': ['B', 'E'],
-             'E': ['A', 'B', 'D'],
-             'F': ['C'],
-             'G': ['C']}
-    BFS_SP(graph, 'A', 'E')
+def minDepth(root):
+    # Если у нас только корень дерева
+    if root is None:
+        return 0
+
+    # Если у нас только одна вершина
+    if root.left is None and root.right is None:
+        return 1
+
+    # Если левое поддерево равно Null, повторить для правого поддерева
+    if root.left is None:
+        return minDepth(root.right) + 1
+
+    # Если правое поддерево равно Null, повторяется для левого поддерева
+    if root.right is None:
+        return minDepth(root.left) + 1
+
+    return min(minDepth(root.left), minDepth(root.right)) + 1
+
+
+root = Node(1)
+root.left = Node(2)
+#root.right = Node(3)
+#root.left.left = Node(4)
+root.left.right = Node(5)
+root.left.right.right = Node(6)
+print("Минимальная глубина бинарного дерева: " + str(minDepth(root)))
