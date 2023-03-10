@@ -63,8 +63,4 @@ if __name__ == '__main__':
         d[edges[i][0]] += 1
         d[edges[i][1]] += 1
 
-    if max_сliques(0, 1) < n:
-        Answer = False
-
-    print(f"Найдётся ли в данном графе клика мощности не менее чем n?\nОтвет : ", Answer)
     print(f"Найти максимальную клику в графе.\nОтвет : ", max_сliques(0, 1))
