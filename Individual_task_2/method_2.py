@@ -47,9 +47,11 @@ def find_cliques(potential_clique=[], remaining_nodes=[], skip_nodes=[], depth=0
         skip_nodes.append(node)
     return found_cliques
 
+
 def main():
     total_cliques = find_cliques(remaining_nodes=all_nodes)
     print('Размер макс.клики:', total_cliques)
+
 
 if __name__ == "__main__":
     main()
